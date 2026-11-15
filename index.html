@@ -96,7 +96,6 @@ nav button.active span{filter:drop-shadow(0 0 7px #ffbd2870)}
 <div class="footer">ZUMER © 2026 · Информация о подключении предоставляется партнёром</div>
 </main><nav><button class="active" data-tab="home" onclick="show('home',this)"><span>⌂</span>Главная</button><button data-tab="connect" onclick="show('connect',this)"><span>＋</span>Подключение</button><button data-tab="profile" onclick="show('profile',this)"><span>◉</span>Кабинет</button><button data-tab="help" onclick="show('help',this)"><span>♡</span>Помощь</button></nav>
 <script>
-function show(id,btn){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.tab===id));window.scrollTo({top:0,behavior:'smooth'})}
 function renderTelegramProfile(){
   const tg=window.Telegram&&window.Telegram.WebApp;
   const user=tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user;
