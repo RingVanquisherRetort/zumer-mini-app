@@ -92,7 +92,7 @@ nav button.active span{filter:drop-shadow(0 0 7px #ffbd2870)}
 <header><div><div class="logo">ZUMER<span style="color:white">.</span></div><div class="tag">COURIER ECOSYSTEM</div></div><select class="lang" id="lang" aria-label="Язык"><option value="ru">RU</option><option value="tg">TJ</option><option value="uz">UZ</option><option value="kk">KZ</option><option value="ky">KG</option><option value="tk">TK</option></select></header>
 <section id="home" class="section active"><div class="hero"><div class="eyebrow">ТВОЙ ГОРОД. ТВОЙ ТЕМП.</div><h1>Твой путь<br>начинается <span>здесь.</span></h1><p class="sub">Помогаем разобраться с подключением к доставке, пройти регистрацию и получить поддержку на каждом этапе.</p><button class="primary" onclick="show('connect')">Стать курьером <span>↗</span></button><button class="secondary" onclick="show('help')">Как это работает?</button></div><div class="cards"><div class="card"><div class="ico">📍</div><b>Выбери город</b><small>Узнай о подключении в своём городе</small></div><div class="card"><div class="ico">🧭</div><b>Понятные шаги</b><small>Инструкции и сопровождение</small></div><div class="card"><div class="ico">🤝</div><b>Поддержка</b><small>Помощь менеджера при регистрации</small></div><div class="card"><div class="ico">🌍</div><b>Твой язык</b><small>Информация на шести языках</small></div></div><div class="pill">ПАРТНЁРСКОЕ ПОДКЛЮЧЕНИЕ</div></section>
 <section id="connect" class="section"><button class="back" onclick="show('home')">← Назад</button><h2 class="title">Начнём знакомство</h2><p class="muted">Выбери город и удобный способ подключения.</p><form id="leadForm"><label class="field"><span>Город</span><select id="city" required><option value="">Выбери город</option><option>Москва</option><option>Ставрополь</option><option>Нальчик</option><option>Пятигорск</option><option>Ессентуки</option><option>Минеральные Воды</option><option>Другой город</option></select></label><label class="field"><span>Как к тебе обращаться?</span><input id="name" placeholder="Имя" autocomplete="given-name" required></label><label class="field"><span>Телефон для связи</span><input id="phone" type="tel" placeholder="+7 ..." autocomplete="tel" required></label><div class="muted" style="font-size:13px;margin:20px 0 10px">Как хочешь подключиться?</div><label class="choice"><input type="radio" name="method" value="self" checked><span>Самостоятельно — перейти к официальной регистрации</span></label><label class="choice"><input type="radio" name="method" value="manager"><span>С помощью менеджера — попросить связаться со мной</span></label><label class="choice"><input type="checkbox" id="consent" required><span style="font-size:12px">Согласен на обработку данных для ответа на заявку. Политика конфиденциальности будет опубликована до запуска приёма заявок.</span></label><button class="primary" type="submit">Продолжить</button><p class="notice" id="formMessage" role="status">Приём заявок временно приостановлен на время настройки российского хранилища. Не вводи реальные персональные данные.</p></form></section>
-<section id="profile" class="section"><h2 class="title">Мой кабинет</h2><p class="muted">Твой профиль и информация о подключении.</p><div class="status"><span class="pill">ПРОФИЛЬ TELEGRAM</span><div id="profileIdentity" style="display:flex;align-items:center;gap:14px;margin-top:18px"><div id="profileAvatar" style="width:54px;height:54px;border-radius:50%;background:#ffffff18;display:grid;place-items:center;font-size:24px">👤</div><div><h3 id="profileName" style="margin:0 0 4px">Открой Mini App в Telegram</h3><p class="muted" id="profileUsername" style="margin:0;font-size:12px">Данные профиля появятся после авторизации</p></div></div><div style="height:1px;background:#ffffff20;margin:18px 0"></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div style="background:#ffffff0b;border:1px solid #ffffff18;border-radius:13px;padding:13px"><div style="font-size:10px;color:#c9bbd7;margin-bottom:6px">ТВОЙ ГОРОД</div><b id="profileCity" style="font-size:14px">Пока не выбран</b></div><div style="background:#ffffff0b;border:1px solid #ffffff18;border-radius:13px;padding:13px"><div style="font-size:10px;color:#c9bbd7;margin-bottom:6px">СТАТУС ЗАЯВКИ</div><b id="profileStatus" style="font-size:14px;color:#ffd15b">Не подана</b></div></div><div style="height:1px;background:#ffffff20;margin:18px 0"></div><h3 style="margin:0 0 8px">Этапы подключения</h3><div class="profile-steps"><div class="profile-step current"><span>1</span><div><b>Анкета</b><small>Заполнение данных и выбор города</small></div></div><div class="profile-step"><span>2</span><div><b>Проверка</b><small>Проверка заявки менеджером</small></div></div><div class="profile-step"><span>3</span><div><b>Подключение</b><small>Инструкции и дальнейшие шаги</small></div></div></div><p class="muted" id="applicationStatus" style="font-size:12px;margin:16px 0 0">Пока заявка не создана. После подключения базы здесь появится её актуальный статус.</p></div><button class="primary" onclick="show('connect')">Перейти к анкете</button><button class="secondary" onclick="show('help')">Связаться с поддержкой</button></section>
+<section id="profile" class="section"><h2 class="title">Мой кабинет</h2><p class="muted">Твой профиль и актуальная информация о подключении.</p><div class="status"><span class="pill">ПРОФИЛЬ TELEGRAM</span><div id="profileIdentity" style="display:flex;align-items:center;gap:14px;margin-top:18px"><div id="profileAvatar" style="width:54px;height:54px;border-radius:50%;background:#ffffff18;display:grid;place-items:center;font-size:24px">👤</div><div><h3 id="profileName" style="margin:0 0 4px">Открой Mini App в Telegram</h3><p class="muted" id="profileUsername" style="margin:0;font-size:12px">Данные профиля появятся после авторизации</p></div></div><div style="height:1px;background:#ffffff20;margin:18px 0"></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div style="background:#ffffff0b;border:1px solid #ffffff18;border-radius:13px;padding:13px"><div style="font-size:10px;color:#c9bbd7;margin-bottom:6px">ТВОЙ ГОРОД</div><b id="profileCity" style="font-size:14px">Загрузка...</b></div><div style="background:#ffffff0b;border:1px solid #ffffff18;border-radius:13px;padding:13px"><div style="font-size:10px;color:#c9bbd7;margin-bottom:6px">СТАТУС ЗАЯВКИ</div><b id="profileStatus" style="font-size:14px;color:#ffd15b">Загрузка...</b></div></div><div style="height:1px;background:#ffffff20;margin:18px 0"></div><div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><h3 style="margin:0">Этапы подключения</h3><span id="profileMethod" class="pill">—</span></div><div class="profile-steps" id="profileSteps"><div class="profile-step"><span>1</span><div><b>Анкета</b><small>Заполнение данных и выбор города</small></div></div><div class="profile-step"><span>2</span><div><b>Проверка</b><small>Проверка заявки</small></div></div><div class="profile-step"><span>3</span><div><b>Подключение</b><small>Дальнейшие инструкции</small></div></div></div><p class="muted" id="applicationStatus" style="font-size:12px;margin:16px 0 0">Загружаем данные заявки...</p><button class="secondary" id="refreshApplication" type="button" onclick="loadMyApplication(true)">↻ Обновить статус</button></div><button class="primary" onclick="show('connect')">Перейти к анкете</button><button class="secondary" onclick="show('help')">Связаться с поддержкой</button></section>
 <section id="help" class="section"><h2 class="title">Помощь и поддержка</h2><p class="muted">Разберёмся с подключением вместе.</p><div class="status"><b>Как подключиться?</b><p class="muted">Выбери город, заполни анкету и выбери самостоятельную регистрацию или помощь менеджера.</p></div><div class="status"><b>Нужна помощь?</b><p class="muted">Напиши нам в Telegram — менеджер подскажет дальнейшие шаги.</p><a href="https://t.me/zumer_rabota" style="color:var(--lime)">Открыть канал ZUMER ↗</a></div><button class="primary" onclick="show('connect')">Оставить заявку</button></section>
 <div class="footer">ZUMER © 2026 · Информация о подключении предоставляется партнёром</div>
 </main><nav><button class="active" data-tab="home" onclick="show('home',this)"><span>⌂</span>Главная</button><button data-tab="connect" onclick="show('connect',this)"><span>＋</span>Подключение</button><button data-tab="profile" onclick="show('profile',this)"><span>◉</span>Кабинет</button><button data-tab="help" onclick="show('help',this)"><span>♡</span>Помощь</button></nav>
@@ -103,8 +103,6 @@ function renderTelegramProfile(){
   const name=document.getElementById('profileName');
   const username=document.getElementById('profileUsername');
   const avatar=document.getElementById('profileAvatar');
-  const status=document.getElementById('applicationStatus');
-  const badge=document.getElementById('applicationBadge');
   if(user){
     const fullName=[user.first_name,user.last_name].filter(Boolean).join(' ');
     name.textContent=fullName||'Пользователь Telegram';
@@ -114,23 +112,75 @@ function renderTelegramProfile(){
       avatar.style.backgroundImage='url("'+user.photo_url.replace(/"/g,'%22')+'")';
       avatar.style.backgroundSize='cover';
       avatar.style.backgroundPosition='center';
-    }else{
-      avatar.textContent=(user.first_name||'Z').slice(0,1).toUpperCase();
-    }
-    status.textContent='Telegram-профиль получен. Данные заявки и её статус появятся после подключения защищённой базы.';
-    badge.textContent='Авторизация Telegram обнаружена';
+    }else avatar.textContent=(user.first_name||'Z').slice(0,1).toUpperCase();
   }else{
     name.textContent='Открой Mini App в Telegram';
-    username.textContent='Данные профиля появятся после запуска внутри Telegram';
-    status.textContent='Сейчас кабинет открыт вне Telegram или Telegram не передал данные пользователя.';
-    badge.textContent='Ожидаем Telegram';
+    username.textContent='Запусти приложение через бота для загрузки заявки';
+  }
+}
+async function loadMyApplication(manual=false){
+  const tg=window.Telegram&&window.Telegram.WebApp;
+  const city=document.getElementById('profileCity');
+  const status=document.getElementById('profileStatus');
+  const info=document.getElementById('applicationStatus');
+  const method=document.getElementById('profileMethod');
+  const refresh=document.getElementById('refreshApplication');
+  const steps=[...document.querySelectorAll('#profileSteps .profile-step')];
+  const initData=tg&&tg.initData;
+  if(!initData){
+    city.textContent='—';status.textContent='Нет авторизации';method.textContent='—';
+    info.textContent='Открой ZUMER через Telegram, чтобы загрузить свою заявку.';
+    return;
+  }
+  if(refresh){refresh.disabled=true;refresh.textContent='Загружаем...';}
+  try{
+    const response=await fetch(SUPABASE_URL+'/functions/v1/get-my-courier-application',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','apikey':SUPABASE_PUBLISHABLE_KEY},
+      body:JSON.stringify({initData})
+    });
+    const result=await response.json().catch(()=>({}));
+    if(!response.ok) throw new Error(result.error||'Не удалось загрузить заявку');
+    const app=result.application;
+    if(!app){
+      city.textContent='Пока не выбран';status.textContent='Не подана';method.textContent='—';
+      info.textContent='У тебя пока нет заявки. Заполни анкету, и её статус появится здесь.';
+      steps.forEach((step,i)=>{step.classList.toggle('current',i===0);step.style.opacity=i===0?'1':'.5';step.querySelector('span').textContent=String(i+1);});
+      return;
+    }
+    city.textContent=app.city||'—';
+    const labels={new:'Новая',contacted:'Менеджер связался',registration_started:'Регистрация начата',activated:'Подключён',rejected:'Отклонена'};
+    status.textContent=labels[app.status]||app.status;
+    method.textContent=app.connection_method==='official'?'Самостоятельно':'С менеджером';
+    const stages={new:1,contacted:2,registration_started:3,activated:4,rejected:0};
+    const stage=stages[app.status]??1;
+    steps.forEach((step,i)=>{
+      const done=app.status==='activated'||i<stage-1;
+      const current=app.status!=='rejected'&&i===stage-1&&app.status!=='activated';
+      step.classList.toggle('current',current);
+      step.style.opacity=done||current?'1':'.48';
+      step.querySelector('span').textContent=done?'✓':String(i+1);
+    });
+    const date=app.created_at?new Date(app.created_at).toLocaleDateString('ru-RU'):'';
+    const descriptions={
+      new:'Заявка получена. Ожидает обработки.',
+      contacted:'Менеджер связался с тобой. Следующий шаг — пройти регистрацию.',
+      registration_started:'Регистрация начата. Следим за дальнейшим подключением.',
+      activated:'Подключение подтверждено. Отлично, добро пожаловать!',
+      rejected:'По заявке пока нельзя продолжить подключение. Свяжись с поддержкой.'
+    };
+    info.textContent=(descriptions[app.status]||'Статус заявки обновлён.')+(date?' Дата заявки: '+date+'.':'');
+  }catch(error){
+    info.textContent=error.message==='Failed to fetch'?'Нет связи с сервером. Попробуй обновить статус позже.':error.message;
+  }finally{
+    if(refresh){refresh.disabled=false;refresh.textContent='↻ Обновить статус';}
   }
 }
 function show(id,btn){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.tab===id));
-  if(id==='profile') renderTelegramProfile();
+  if(id==='profile'){renderTelegramProfile();loadMyApplication();}
   window.scrollTo({top:0,behavior:'smooth'});
 }
 const SUPABASE_URL='https://xtpgrdmbizclrbdqaspt.supabase.co';
