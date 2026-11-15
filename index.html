@@ -133,9 +133,52 @@ function show(id,btn){
   if(id==='profile') renderTelegramProfile();
   window.scrollTo({top:0,behavior:'smooth'});
 }
-document.getElementById('leadForm').addEventListener('submit',e=>{
+const SUPABASE_URL='https://xtpgrdmbizclrbdqaspt.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY='sb_publishable_k1gJoUP4n3LoR_HRM8W49w_PZJYcNjv';
+document.getElementById('leadForm').addEventListener('submit',async e=>{
   e.preventDefault();
-  document.getElementById('formMessage').textContent='Приём заявок временно приостановлен. Пока не вводи реальные персональные данные.';
+  const form=e.currentTarget;
+  const button=form.querySelector('button[type="submit"]');
+  const message=document.getElementById('formMessage');
+  const tg=window.Telegram&&window.Telegram.WebApp;
+  const initData=tg&&tg.initData;
+  if(!initData){
+    message.textContent='Открой Mini App через Telegram, чтобы подтвердить аккаунт.';
+    return;
+  }
+  const method=form.querySelector('input[name="method"]:checked')?.value==='self'?'official':'manager';
+  const payload={
+    initData,
+    city:document.getElementById('city').value,
+    name:document.getElementById('name').value.trim(),
+    phone:document.getElementById('phone').value.trim(),
+    language:document.getElementById('lang').value,
+    connection_method:method,
+    consent:document.getElementById('consent').checked
+  };
+  button.disabled=true;
+  button.textContent='Отправляем...';
+  message.textContent='Проверяем Telegram и отправляем заявку...';
+  try{
+    const response=await fetch(SUPABASE_URL+'/functions/v1/submit-courier-application',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','apikey':SUPABASE_PUBLISHABLE_KEY},
+      body:JSON.stringify(payload)
+    });
+    const result=await response.json().catch(()=>({}));
+    if(!response.ok) throw new Error(result.error||'Не удалось отправить заявку');
+    message.textContent='Заявка успешно отправлена! Мы свяжемся с тобой по указанному телефону.';
+    form.reset();
+    if(tg) tg.HapticFeedback?.notificationOccurred('success');
+  }catch(error){
+    message.textContent=error.message==='Failed to fetch'
+      ?'Не удалось связаться с сервером. Проверь интернет и попробуй ещё раз.'
+      :error.message;
+    if(tg) tg.HapticFeedback?.notificationOccurred('error');
+  }finally{
+    button.disabled=false;
+    button.textContent='Продолжить';
+  }
 });
 document.getElementById('lang').addEventListener('change',e=>{if(e.target.value!=='ru')alert('Перевод на выбранный язык добавим следующим этапом. Сейчас доступна русская версия.');});
 </script></body></html>
