@@ -51,6 +51,40 @@ nav button.active{color:var(--yellow)}
 .footer{color:#a99ab9;text-align:center;font-size:10px;margin:35px 0 10px}
 @media(max-width:360px){.app{padding-left:14px;padding-right:14px}.hero h1{font-size:38px}.card{padding:13px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Refined inner screens — aligned with the ZUMER website */
+.section.active{animation:sectionIn .28s ease both}
+@keyframes sectionIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.section:not(#home){padding-top:24px}
+.section:not(#home)>.title{font-size:30px;line-height:1.12;letter-spacing:-1.2px;margin:8px 0 10px}
+.section:not(#home)>.muted{font-size:14px;max-width:390px;margin-bottom:22px}
+.back{display:inline-flex;align-items:center;gap:8px;padding:9px 13px;margin:0 0 18px;border:1px solid #ffffff24;border-radius:999px;background:#ffffff0b;color:#ffca51;font-size:12px;letter-spacing:.3px}
+.back:active{background:#ffffff18}
+.section .title:before{content:"";display:block;width:38px;height:4px;border-radius:8px;margin-bottom:15px;background:linear-gradient(100deg,#ffd34c,#ff8a1c)}
+.field{margin:20px 0}
+.field span{font-size:12px;font-weight:800;letter-spacing:.2px;color:#ded3e8}
+.field input,.field select{min-height:52px;background:linear-gradient(145deg,#2b1748,#211333);border-color:#ffffff26;box-shadow:inset 0 1px 0 #ffffff08}
+.field input::placeholder{color:#9f91b2}
+.choice{align-items:flex-start;background:linear-gradient(145deg,#2b1748,#211333);border-color:#ffffff20;line-height:1.45;font-size:13px;transition:border-color .2s,background .2s}
+.choice:has(input:checked){border-color:#ffbd2877;background:linear-gradient(145deg,#38204f,#28163f)}
+.choice input{margin-top:2px;width:17px;height:17px}
+#leadForm>.primary{margin-top:16px;background:linear-gradient(110deg,#ffbd28,#ff8a1c);color:#24133f;box-shadow:0 10px 25px #ff8c1c30}
+.notice{padding:13px 14px;border:1px solid #ffffff1b;border-left:3px solid #ffbd28;border-radius:12px;background:#ffffff09}
+.status{position:relative;overflow:hidden;background:linear-gradient(145deg,#49246c,#25123f 72%,#1a1030);border:1px solid #ffffff26;border-radius:20px;padding:20px;box-shadow:0 16px 38px #08041235}
+.status:after{content:"";position:absolute;width:150px;height:150px;border:1px solid #ffffff14;border-radius:50%;right:-65px;top:-75px;pointer-events:none}
+.status h3{font-size:19px;line-height:1.2;margin:17px 0 8px;letter-spacing:-.4px}
+.status .muted{font-size:13px;color:#d2c7df}
+.status strong{display:inline-flex;margin-top:8px;padding:9px 12px;border-radius:999px;background:#ffbd281c;color:#ffd15b;font-size:11px}
+#help .status{background:linear-gradient(145deg,#fff,#f8f4fc);color:#291746;border:1px solid #ffffff80;box-shadow:0 12px 32px #0804122b}
+#help .status .muted{color:#776b88}
+#help .status b{font-size:16px;color:#291746}
+#help .status a{display:inline-flex;margin-top:8px;color:#8c4d00!important;font-weight:900;text-decoration:none}
+#profile .primary,#help>.primary{background:linear-gradient(110deg,#ffbd28,#ff8a1c);color:#24133f;box-shadow:0 10px 25px #ff8c1c30}
+.section>.primary{margin-top:18px}
+nav button{transition:color .2s,transform .2s}
+nav button.active{color:#ffd15b}
+nav button.active span{filter:drop-shadow(0 0 7px #ffbd2870)}
+@media(max-width:380px){.section:not(#home)>.title{font-size:27px}.choice{padding:13px}.status{padding:17px}}
 </style></head>
 <body><main class="app">
 <header><div><div class="logo">ZUMER<span style="color:white">.</span></div><div class="tag">COURIER ECOSYSTEM</div></div><select class="lang" id="lang" aria-label="Язык"><option value="ru">RU</option><option value="tg">TJ</option><option value="uz">UZ</option><option value="kk">KZ</option><option value="ky">KG</option><option value="tk">TK</option></select></header>
