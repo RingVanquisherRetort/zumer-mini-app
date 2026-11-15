@@ -156,7 +156,7 @@ async function loadMyApplication(manual=false){
     const courierText=document.getElementById("courierMessageText");
     if(app.courier_message&&app.courier_message.trim()){courierText.textContent=app.courier_message;courierCard.style.display="block";}else{courierCard.style.display="none";courierText.textContent="";}
     method.textContent=app.connection_method==='official'?'Самостоятельно':'С менеджером';
-    const stages={new:1,contacted:2,registration_started:3,activated:4,rejected:0};
+    const stages={new:2,contacted:3,registration_started:3,activated:4,rejected:0};
     const stage=stages[app.status]??1;
     steps.forEach((step,i)=>{
       const done=app.status==='activated'||i<stage-1;
@@ -167,11 +167,11 @@ async function loadMyApplication(manual=false){
     });
     const date=app.created_at?new Date(app.created_at).toLocaleDateString('ru-RU'):'';
     const descriptions={
-      new:'Заявка получена. Ожидает обработки.',
-      contacted:'Менеджер связался с тобой. Следующий шаг — пройти регистрацию.',
-      registration_started:'Регистрация начата. Следим за дальнейшим подключением.',
-      activated:'Подключение подтверждено. Отлично, добро пожаловать!',
-      rejected:'По заявке пока нельзя продолжить подключение. Свяжись с поддержкой.'
+      new:'Заявка получена и ожидает проверки менеджером. Пока ничего дополнительно делать не нужно. Если потребуется информация, менеджер напишет сюда.',
+      contacted:'Менеджер уже связался с тобой. Проверь сообщение от менеджера выше и следуй указанным инструкциям.',
+      registration_started:'Ты начал регистрацию. Заверши шаги в официальном приложении Яндекс Про. После этого статус можно будет обновить.',
+      activated:'Подключение подтверждено. Добро пожаловать в ZUMER! Если появятся вопросы, напиши в поддержку.',
+      rejected:'По этой заявке подключение пока не продолжается. Открой поддержку, чтобы уточнить причину и возможные дальнейшие действия.'
     };
     info.textContent=(descriptions[app.status]||'Статус заявки обновлён.')+(date?' Дата заявки: '+date+'.':'');
   }catch(error){
