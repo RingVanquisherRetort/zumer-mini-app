@@ -140,7 +140,7 @@ async function loadMyApplication(manual=false){
       body:JSON.stringify({initData})
     });
     const result=await response.json().catch(()=>({}));
-    if(!response.ok) throw new Error(result.error||'Не удалось загрузить заявку');
+    if(!response.ok) throw new Error((result.error||'Не удалось загрузить заявку')+(result.reason?' ['+result.reason+']':''));
     const app=result.application;
     if(!app){
       city.textContent='Пока не выбран';status.textContent='Не подана';method.textContent='—';
