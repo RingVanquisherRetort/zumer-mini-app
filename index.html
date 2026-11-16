@@ -467,9 +467,9 @@ document.getElementById('leadForm').addEventListener('submit',async e=>{
   document.getElementById('languageWelcome').hidden=true;
   window.zumerLanguage=lang;
  }
- window.chooseLanguage=applyLanguage;
+ window.chooseLanguage=function(lang){try{localStorage.setItem(KEY,lang);window.location.reload();}catch(e){applyLanguage(lang);}};
  const selector=document.getElementById('lang');
- if(selector)selector.addEventListener('change',e=>applyLanguage(e.target.value));
+ if(selector)selector.addEventListener('change',e=>window.chooseLanguage(e.target.value));
  let saved='';try{saved=localStorage.getItem(KEY)||'';}catch(e){}
  if(saved&&translations[saved])applyLanguage(saved);
  else document.getElementById('languageWelcome').hidden=false;
