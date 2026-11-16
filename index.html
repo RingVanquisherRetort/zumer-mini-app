@@ -221,7 +221,7 @@ const ZUMER_TRANSLATIONS={
 };
 function zumerTranslateTree(root,idx){
  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let node;while(node=walker.nextNode()){
-  const key=node.nodeValue.trim();const values=ZUMER_TRANSLATIONS[key];if(values&&values[idx])node.nodeValue=node.nodeValue.replace(key,values[idx]);
+  if(node.parentElement&&node.parentElement.closest('#admin'))continue;const key=node.nodeValue.trim();const values=ZUMER_TRANSLATIONS[key];if(values&&values[idx])node.nodeValue=node.nodeValue.replace(key,values[idx]);
  }
  if(root.querySelectorAll)root.querySelectorAll('[placeholder]').forEach(el=>{const v=ZUMER_TRANSLATIONS[el.getAttribute('placeholder')];if(v)el.setAttribute('placeholder',v[idx]);});
 }
@@ -233,7 +233,7 @@ function zumerApplyLanguage(code){
 }
 function chooseLanguage(code){localStorage.setItem('zumer_language',code);zumerApplyLanguage(code);}
 function showLanguageWelcome(){const saved=localStorage.getItem('zumer_language');if(saved&&ZUMER_LANGS.includes(saved))zumerApplyLanguage(saved);else document.getElementById('languageWelcome').hidden=false;}
-const zumerObserver=new MutationObserver(records=>{const idx=window.zumerLanguageIndex;if(!Number.isInteger(idx)||idx===0)return;records.forEach(record=>record.addedNodes.forEach(node=>{if(node.nodeType===Node.TEXT_NODE){const key=node.nodeValue.trim(),v=ZUMER_TRANSLATIONS[key];if(v&&v[idx])node.nodeValue=node.nodeValue.replace(key,v[idx]);}else if(node.nodeType===Node.ELEMENT_NODE)zumerTranslateTree(node,idx);}));});
+const zumerObserver=new MutationObserver(records=>{const idx=window.zumerLanguageIndex;if(!Number.isInteger(idx)||idx===0)return;records.forEach(record=>record.addedNodes.forEach(node=>{if(node.nodeType===Node.TEXT_NODE){const key=node.nodeValue.trim(),v=ZUMER_TRANSLATIONS[key];if(v&&v[idx])node.nodeValue=node.nodeValue.replace(key,v[idx]);}else if(node.nodeType===Node.ELEMENT_NODE&&!node.closest('#admin'))zumerTranslateTree(node,idx);}));});
 zumerObserver.observe(document.body,{childList:true,subtree:true});
 document.addEventListener('DOMContentLoaded',()=>{
  const selector=document.getElementById('lang');
