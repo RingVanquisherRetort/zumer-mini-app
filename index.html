@@ -87,8 +87,34 @@ nav button{transition:color .2s,transform .2s}
 nav button.active{color:#ffd15b}
 nav button.active span{filter:drop-shadow(0 0 7px #ffbd2870)}
 @media(max-width:380px){.section:not(#home)>.title{font-size:27px}.choice{padding:13px}.status{padding:17px}}
+
+#languageWelcome{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:22px;background:radial-gradient(ellipse at 90% 0%,#49246c 0,transparent 42%),#160d2c}
+#languageWelcome[hidden]{display:none}
+.language-panel{width:min(100%,440px);padding:26px 20px;border:1px solid #ffffff24;border-radius:24px;background:linear-gradient(145deg,#2b1748,#1a1030);box-shadow:0 24px 70px #0008}
+.language-panel .logo{font-size:30px}.language-panel h1{font-size:25px;line-height:1.2;margin:24px 0 8px}.language-panel p{color:#c9bbd7;font-size:13px;line-height:1.55;margin:0 0 20px}
+.language-options{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.language-options button{border:1px solid #ffffff25;background:#ffffff0b;color:#fff;border-radius:14px;padding:15px 10px;text-align:left;font-weight:800;min-height:58px}
+.language-options button:active,.language-options button:focus{border-color:#ffbd28;background:#ffbd2818;outline:none}
+.language-options button span{display:block;font-size:10px;color:#c9bbd7;font-weight:600;margin-top:4px}
+
 </style></head>
-<body><main class="app">
+<body><div id="languageWelcome" role="dialog" aria-modal="true" aria-labelledby="languageTitle">
+ <div class="language-panel">
+  <div class="logo">ZUMER<span style="color:#ffbd28">.</span></div>
+  <div class="tag">COURIER ECOSYSTEM</div>
+  <h1 id="languageTitle">Выбери удобный язык</h1>
+  <p id="languageSubtitle">Мы покажем информацию о подключении и поддержке на выбранном языке.</p>
+  <div class="language-options">
+   <button type="button" onclick="chooseLanguage('ru')">🇷🇺 Русский<span>Русский язык</span></button>
+   <button type="button" onclick="chooseLanguage('tg')">🇹🇯 Тоҷикӣ<span>Забони тоҷикӣ</span></button>
+   <button type="button" onclick="chooseLanguage('uz')">🇺🇿 O‘zbekcha<span>O‘zbek tili</span></button>
+   <button type="button" onclick="chooseLanguage('kk')">🇰🇿 Қазақша<span>Қазақ тілі</span></button>
+   <button type="button" onclick="chooseLanguage('ky')">🇰🇬 Кыргызча<span>Кыргыз тили</span></button>
+   <button type="button" onclick="chooseLanguage('tk')">🇹🇲 Türkmençe<span>Türkmen dili</span></button>
+  </div>
+ </div>
+</div>
+<main class="app">
 <header><div><div class="logo">ZUMER<span style="color:white">.</span></div><div class="tag">COURIER ECOSYSTEM</div></div><select class="lang" id="lang" aria-label="Язык"><option value="ru">RU</option><option value="tg">TJ</option><option value="uz">UZ</option><option value="kk">KZ</option><option value="ky">KG</option><option value="tk">TK</option></select></header>
 <section id="home" class="section active"><div class="hero"><div class="eyebrow">ТВОЙ ГОРОД. ТВОЙ ТЕМП.</div><h1>Твой путь<br>начинается <span>здесь.</span></h1><p class="sub">Помогаем разобраться с подключением к доставке, пройти регистрацию и получить поддержку на каждом этапе.</p><button class="primary" onclick="show('connect')">Стать курьером <span>↗</span></button><button class="secondary" onclick="show('help')">Как это работает?</button></div><div class="cards"><div class="card"><div class="ico">📍</div><b>Выбери город</b><small>Узнай о подключении в своём городе</small></div><div class="card"><div class="ico">🧭</div><b>Понятные шаги</b><small>Инструкции и сопровождение</small></div><div class="card"><div class="ico">🤝</div><b>Поддержка</b><small>Помощь менеджера при регистрации</small></div><div class="card"><div class="ico">🌍</div><b>Твой язык</b><small>Информация на шести языках</small></div></div><div class="pill">ПАРТНЁРСКОЕ ПОДКЛЮЧЕНИЕ</div></section>
 <section id="connect" class="section"><button class="back" onclick="show('home')">← Назад</button><h2 class="title">Начнём знакомство</h2><p class="muted">Выбери город и удобный способ подключения.</p><form id="leadForm"><label class="field"><span>Город</span><select id="city" required><option value="">Выбери город</option><option>Москва</option><option>Ставрополь</option><option>Нальчик</option><option>Пятигорск</option><option>Ессентуки</option><option>Минеральные Воды</option><option>Другой город</option></select></label><label class="field"><span>Как к тебе обращаться?</span><input id="name" placeholder="Имя" autocomplete="given-name" required></label><label class="field"><span>Телефон для связи</span><input id="phone" type="tel" placeholder="+7 ..." autocomplete="tel" required></label><div class="muted" style="font-size:13px;margin:20px 0 10px">Как хочешь подключиться?</div><label class="choice"><input type="radio" name="method" value="self" checked><span>Самостоятельно — перейти к официальной регистрации</span></label><label class="choice"><input type="radio" name="method" value="manager"><span>С помощью менеджера — попросить связаться со мной</span></label><label class="choice"><input type="checkbox" id="consent" required><span style="font-size:12px">Согласен на обработку данных для ответа на заявку. Политика конфиденциальности будет опубликована до запуска приёма заявок.</span></label><button class="primary" type="submit">Продолжить</button><p class="notice" id="formMessage" role="status">Заполни анкету, выбери удобный способ подключения — и мы подскажем дальнейшие шаги.</p></form></section>
@@ -107,6 +133,77 @@ nav button.active span{filter:drop-shadow(0 0 7px #ffbd2870)}
 <div class="footer">ZUMER © 2026 · Информация о подключении предоставляется партнёром</div>
 </main><nav><button class="active" data-tab="home" onclick="show('home',this)"><span>⌂</span>Главная</button><button data-tab="connect" onclick="show('connect',this)"><span>＋</span>Подключение</button><button data-tab="profile" onclick="show('profile',this)"><span>◉</span>Кабинет</button><button data-tab="help" onclick="show('help',this)"><span>♡</span>Помощь</button></nav>
 <script>
+
+const ZUMER_LANGS=['ru','tg','uz','kk','ky','tk'];
+const ZUMER_TRANSLATIONS={
+'ТВОЙ ГОРОД. ТВОЙ ТЕМП.':['ТВОЙ ГОРОД. ТВОЙ ТЕМП.','ШАҲРИ ТУ. СУРЪАТИ ТУ.','SENING SHAHARING. SENING SUR’ATING.','СЕНІҢ ҚАЛАҢ. СЕНІҢ ҚАРҚЫНЫҢ.','СЕНИН ШААРЫҢ. СЕНИН ЫҢГАЙЫҢ.','ŞÄHERIŇ. TÄRPIŇ.'],
+'Твой путь':['Твой путь','Роҳи ту','Sening yo‘ling','Сенің жолың','Сенин жолуң','Seniň ýoluň'],
+'начинается':['начинается','оғоз меёбад','boshlanadi','басталады','башталат','başlaýar'],
+'здесь.':['здесь.','ин ҷо.','shu yerda.','осы жерден.','ушул жерден.','şu ýerden.'],
+'Помогаем разобраться с подключением к доставке, пройти регистрацию и получить поддержку на каждом этапе.':['Помогаем разобраться с подключением к доставке, пройти регистрацию и получить поддержку на каждом этапе.','Мо дар пайвастшавӣ ба хизматрасонии расонидан, бақайдгирӣ ва дастгирӣ дар ҳар марҳила кӯмак мекунем.','Yetkazib berish xizmatiga ulanish, ro‘yxatdan o‘tish va har bosqichda yordam olishda ko‘maklashamiz.','Жеткізу қызметіне қосылуға, тіркелуге және әр кезеңде қолдау алуға көмектесеміз.','Жеткирүү кызматына кошулууга, катталууга жана ар бир этапта жардам алууга көмөктөшөбүз.','Eltip bermek hyzmatyna birikmäge, hasaba alynmaga we her tapgyrda goldaw almaga kömek edýäris.'],
+'Стать курьером':['Стать курьером','Курьер шудан','Kuryer bo‘lish','Курьер болу','Курьер болуу','Kurýer bolmak'],
+'Как это работает?':['Как это работает?','Ин чӣ гуна кор мекунад?','Bu qanday ishlaydi?','Бұл қалай жұмыс істейді?','Бул кантип иштейт?','Bu nähili işleýär?'],
+'Выбери город':['Выбери город','Шаҳрро интихоб кун','Shaharni tanlang','Қаланы таңда','Шаарды танда','Şäheri saýla'],
+'Узнай о подключении в своём городе':['Узнай о подключении в своём городе','Дар бораи пайвастшавӣ дар шаҳри худ маълумот гир','Shahringizda ulanish haqida bilib oling','Өз қалаңдағы қосылу туралы біл','Шаарыңдагы кошулуу тууралуу бил','Şäheriňde birikmek barada öwren'],
+'Понятные шаги':['Понятные шаги','Қадамҳои фаҳмо','Tushunarli qadamlar','Түсінікті қадамдар','Түшүнүктүү кадамдар','Düşnükli ädimler'],
+'Инструкции и сопровождение':['Инструкции и сопровождение','Дастурҳо ва ҳамроҳӣ','Yo‘riqnomalar va kuzatuv','Нұсқаулықтар мен сүйемелдеу','Нускамалар жана коштоо','Gollanmalar we ýardam'],
+'Поддержка':['Поддержка','Дастгирӣ','Yordam','Қолдау','Колдоо','Goldaw'],
+'Помощь менеджера при регистрации':['Помощь менеджера при регистрации','Кӯмаки менеҷер ҳангоми бақайдгирӣ','Ro‘yxatdan o‘tishda menejer yordami','Тіркелу кезінде менеджер көмегі','Катталууда менеджердин жардамы','Hasaba alnanda menejer kömegi'],
+'Твой язык':['Твой язык','Забони ту','Sening tiling','Сенің тілің','Сенин тилиң','Seniň diliň'],
+'Информация на шести языках':['Информация на шести языках','Маълумот бо шаш забон','Olti tilda ma’lumot','Алты тілдегі ақпарат','Алты тилдеги маалымат','Alty dilde maglumat'],
+'ПАРТНЁРСКОЕ ПОДКЛЮЧЕНИЕ':['ПАРТНЁРСКОЕ ПОДКЛЮЧЕНИЕ','ПАЙВАСТШАВИИ ШАРИКӢ','HAMKORLIK ASOSIDA ULANISH','СЕРІКТЕСТІК АРҚЫЛЫ ҚОСЫЛУ','ӨНӨКТӨШТҮК АРКЫЛУУ КОШУЛУУ','HYZMATDAŞ ARKALY BIRIKMEK'],
+'Главная':['Главная','Асосӣ','Bosh sahifa','Басты бет','Башкы бет','Baş sahypa'],
+'Подключение':['Подключение','Пайвастшавӣ','Ulanish','Қосылу','Кошулуу','Birikmek'],
+'Кабинет':['Кабинет','Кабинет','Kabinet','Жеке кабинет','Жеке кабинет','Şahsy otag'],
+'Помощь':['Помощь','Кӯмак','Yordam','Көмек','Жардам','Kömek'],
+'Назад':['Назад','Бозгашт','Orqaga','Артқа','Артка','Yza'],
+'Начнём знакомство':['Начнём знакомство','Биё шинос шавем','Keling, tanishamiz','Танысудан бастайық','Кел, таанышалы','Tanyşalyň'],
+'Выбери город и удобный способ подключения.':['Выбери город и удобный способ подключения.','Шаҳр ва роҳи қулайи пайвастшавиро интихоб кун.','Shahar va qulay ulanish usulini tanlang.','Қала мен қосылудың ыңғайлы тәсілін таңда.','Шаарды жана кошулуунун ыңгайлуу жолун танда.','Şäheri we amatly birikme usulyny saýla.'],
+'Город':['Город','Шаҳр','Shahar','Қала','Шаар','Şäher'],
+'Выбери город':['Выбери город','Шаҳрро интихоб кун','Shaharni tanlang','Қаланы таңда','Шаарды танда','Şäheri saýla'],
+'Как к тебе обращаться?':['Как к тебе обращаться?','Чӣ тавр ба ту муроҷиат кунем?','Sizga qanday murojaat qilaylik?','Саған қалай жүгінеміз?','Сага кантип кайрылабыз?','Size nähili ýüzleneli?'],
+'Имя':['Имя','Ном','Ism','Аты','Атың','Ady'],
+'Телефон для связи':['Телефон для связи','Рақами телефон барои тамос','Bog‘lanish uchun telefon','Байланыс телефоны','Байланыш телефону','Habarlaşmak üçin telefon'],
+'Как хочешь подключиться?':['Как хочешь подключиться?','Чӣ гуна пайваст шудан мехоҳӣ?','Qanday ulanishni xohlaysiz?','Қалай қосылғың келеді?','Кантип кошулгуң келет?','Nähili birikmek isleýärsiň?'],
+'Самостоятельно — перейти к официальной регистрации':['Самостоятельно — перейти к официальной регистрации','Худам — ба бақайдгирии расмӣ гузаштан','Mustaqil — rasmiy ro‘yxatdan o‘tishga o‘tish','Өзім — ресми тіркеуге өту','Өз алдынча — расмий каттоого өтүү','Özbaşdak — resmi hasaba alyşa geçmek'],
+'С помощью менеджера — попросить связаться со мной':['С помощью менеджера — попросить связаться со мной','Бо ёрии менеҷер — хоҳиш кунам, ки бо ман тамос гирад','Menejer yordamida — men bilan bog‘lanishini so‘rash','Менеджер көмегімен — менімен байланысуын сұрау','Менеджердин жардамы менен — мени менен байланышуусун өтүнүү','Menejer arkaly — meniň bilen habarlaşmagyny haýyş etmek'],
+'Продолжить':['Продолжить','Идома додан','Davom etish','Жалғастыру','Улантуу','Dowam etmek'],
+'Мой кабинет':['Мой кабинет','Кабинети ман','Mening kabinetim','Менің кабинетім','Менин кабинетім','Şahsy otagym'],
+'Твой профиль и актуальная информация о подключении.':['Твой профиль и актуальная информация о подключении.','Профили ту ва маълумоти нав дар бораи пайвастшавӣ.','Profilingiz va ulanish haqidagi dolzarb ma’lumot.','Профилің және қосылу туралы өзекті ақпарат.','Профилиң жана кошулуу тууралуу жаңыланган маалымат.','Profiliňiz we birikme baradaky täze maglumat.'],
+'Перейти к анкете':['Перейти к анкете','Ба анкета гузаштан','Anketaga o‘tish','Сауалнамаға өту','Анкетага өтүү','Anketa geçmek'],
+'Связаться с поддержкой':['Связаться с поддержкой','Бо дастгирӣ тамос гирифтан','Yordam xizmatiga murojaat qilish','Қолдау қызметіне хабарласу','Колдоо кызматына кайрылуу','Goldaw bilen habarlaşmak'],
+'Админ-панель':['Админ-панель','Панели администратор','Admin paneli','Әкімші панелі','Администратор панели','Admin paneli'],
+'Помощь и поддержка':['Помощь и поддержка','Кӯмак ва дастгирӣ','Yordam va qo‘llab-quvvatlash','Көмек және қолдау','Жардам жана колдоо','Kömek we goldaw'],
+'Разберёмся с подключением вместе.':['Разберёмся с подключением вместе.','Якҷоя масъалаи пайвастшавиро ҳал мекунем.','Ulanish masalasini birgalikda hal qilamiz.','Қосылу мәселесін бірге шешеміз.','Кошулуу маселесин чогуу чечебиз.','Birikmek meselesini bile çözeris.'],
+'Как подключиться?':['Как подключиться?','Чӣ тавр пайваст шудан?','Qanday ulanish mumkin?','Қалай қосылуға болады?','Кантип кошулса болот?','Nädip birikmeli?'],
+'Выбери город, заполни анкету и выбери самостоятельную регистрацию или помощь менеджера.':['Выбери город, заполни анкету и выбери самостоятельную регистрацию или помощь менеджера.','Шаҳрро интихоб кун, анкетаро пур кун ва бақайдгирии мустақил ё кӯмаки менеҷерро интихоб кун.','Shaharni tanlang, anketani to‘ldiring va mustaqil ro‘yxatdan o‘tish yoki menejer yordamini tanlang.','Қаланы таңдап, сауалнаманы толтыр да, өзің тіркелуді немесе менеджер көмегін таңда.','Шаарды тандап, анкетаны толтур да, өз алдынча катталууну же менеджер жардамын танда.','Şäheri saýla, anketany doldur we özbaşdak hasaba alnyşy ýa-da menejer kömegini saýla.'],
+'Нужна помощь?':['Нужна помощь?','Кӯмак лозим аст?','Yordam kerakmi?','Көмек керек пе?','Жардам керекпи?','Kömek gerekmi?'],
+'Напиши нам в Telegram — менеджер подскажет дальнейшие шаги.':['Напиши нам в Telegram — менеджер подскажет дальнейшие шаги.','Ба мо дар Telegram навис — менеҷер қадамҳои минбаъдаро мефаҳмонад.','Telegram orqali yozing — menejer keyingi qadamlarni tushuntiradi.','Telegram-ға жаз — менеджер келесі қадамдарды түсіндіреді.','Telegram аркылуу жаз — менеджер кийинки кадамдарды түшүндүрөт.','Telegram arkaly ýaz — menejer indiki ädimleri düşündirer.'],
+'Открыть чат с ZUMER ↗':['Открыть чат с ZUMER ↗','Чати ZUMER-ро кушодан ↗','ZUMER chatini ochish ↗','ZUMER чатын ашу ↗','ZUMER чаттын ачуу ↗','ZUMER çatyny aç ↗'],
+'Оставить заявку':['Оставить заявку','Дархост фиристодан','Ariza qoldirish','Өтінім қалдыру','Арыз калтыруу','Arza galdyrmak'],
+'Выбери удобный язык':['Выбери удобный язык','Забони мувофиқро интихоб кун','O‘zingizga qulay tilni tanlang','Өзіңе ыңғайлы тілді таңда','Өзүңө ыңгайлуу тилди танда','Özüňe amatly dili saýla'],
+'Мы покажем информацию о подключении и поддержке на выбранном языке.':['Мы покажем информацию о подключении и поддержке на выбранном языке.','Мо маълумотро дар бораи пайвастшавӣ ва дастгирӣ бо забони интихобшуда нишон медиҳем.','Ulanish va yordam haqidagi ma’lumotlarni tanlangan tilda ko‘rsatamiz.','Қосылу және қолдау туралы ақпаратты таңдалған тілде көрсетеміз.','Кошулуу жана колдоо тууралуу маалыматты тандалган тилде көрсөтөбүз.','Birikmek we goldaw baradaky maglumaty saýlanan diliňde görkezeris.']
+};
+function zumerApplyLanguage(code){
+ const idx=ZUMER_LANGS.indexOf(code);if(idx<0)return;
+ document.documentElement.lang=code==='tg'?'tg':code;
+ const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+ let node;while(node=walker.nextNode()){
+  const key=node.nodeValue.trim();const values=ZUMER_TRANSLATIONS[key];
+  if(values&&values[idx])node.nodeValue=node.nodeValue.replace(key,values[idx]);
+ }
+ document.querySelectorAll('[placeholder]').forEach(el=>{const v=ZUMER_TRANSLATIONS[el.getAttribute('placeholder')];if(v)el.setAttribute('placeholder',v[idx]);});
+ const selector=document.getElementById('lang');if(selector)selector.value=code;
+ document.getElementById('languageWelcome').hidden=true;
+}
+function chooseLanguage(code){localStorage.setItem('zumer_language',code);zumerApplyLanguage(code);}
+function showLanguageWelcome(){const saved=localStorage.getItem('zumer_language');if(saved&&ZUMER_LANGS.includes(saved))zumerApplyLanguage(saved);else document.getElementById('languageWelcome').hidden=false;}
+document.addEventListener('DOMContentLoaded',()=>{
+ const selector=document.getElementById('lang');
+ if(selector)selector.addEventListener('change',e=>{localStorage.setItem('zumer_language',e.target.value);location.reload();});
+ showLanguageWelcome();
+});
+
 function renderTelegramProfile(){
   const tg=window.Telegram&&window.Telegram.WebApp;
   const user=tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user;
@@ -342,5 +439,5 @@ document.getElementById('leadForm').addEventListener('submit',async e=>{
     button.textContent='Продолжить';
   }
 });
-document.getElementById('lang').addEventListener('change',e=>{if(e.target.value!=='ru')alert('Перевод на выбранный язык добавим следующим этапом. Сейчас доступна русская версия.');});
+
 </script></body></html>
