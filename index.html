@@ -218,6 +218,9 @@ const ZUMER_TRANSLATIONS={
 "У тебя пока нет заявки. Заполни анкету, и её статус появится здесь.":["У тебя пока нет заявки. Заполни анкету, и её статус появится здесь.","Ту ҳоло дархост надорӣ. Анкетаро пур кун, ҳолати он дар ин ҷо пайдо мешавад.","Hozircha arizang yo‘q. Anketani to‘ldir, uning holati shu yerda ko‘rinadi.","Әзірге өтінімің жоқ. Сауалнаманы толтыр, мәртебесі осында көрінеді.","Азырынча арызың жок. Анкетаны толтур, абалы бул жерде көрүнөт.","Häzirlikçe arzanyň ýok. Anketany doldur, ýagdaýy şu ýerde görkeziler."],
 "Загрузка...":["Загрузка...","Боргирӣ...","Yuklanmoqda...","Жүктелуде...","Жүктөлүүдө...","Ýüklenýär..."],
 "Не удалось загрузить заявку":["Не удалось загрузить заявку","Боргирии дархост муяссар нашуд","Arizani yuklab bo‘lmadi","Өтінімді жүктеу мүмкін болмады","Арызды жүктөө мүмкүн болгон жок","Arzany ýükläp bolmady"]
+,'Анкета отправлена! Теперь заверши регистрацию на официальной странице Яндекса.':['Анкета отправлена! Теперь заверши регистрацию на официальной странице Яндекса.','Дархост фиристода шуд! Акнун бақайдгириро дар саҳифаи расмии Яндекс анҷом деҳ.','Ariza yuborildi! Endi Yandex’ning rasmiy sahifasida ro‘yxatdan o‘tishni yakunlang.','Өтінім жіберілді! Енді Яндекстің ресми парақшасында тіркеуді аяқта.','Арыз жөнөтүлдү! Эми Яндекстин расмий барагында каттоону аякта.','Arza iberildi! Indi Ýandex-iň resmi sahypasynda hasaba alnyşy tamamla.'],
+'Перейти к официальной регистрации Яндекса ↗':['Перейти к официальной регистрации Яндекса ↗','Ба бақайдгирии расмии Яндекс гузаштан ↗','Yandex rasmiy ro‘yxatdan o‘tish sahifasiga o‘tish ↗','Яндекстің ресми тіркеуіне өту ↗','Яндекстин расмий каттоосуна өтүү ↗','Ýandex-iň resmi hasaba alyş sahypasyna geçmek ↗'],
+'Заявка отправлена! Менеджер свяжется с тобой по указанному телефону.':['Заявка отправлена! Менеджер свяжется с тобой по указанному телефону.','Дархост фиристода шуд! Менеҷер бо рақами телефони нишондодаат бо ту тамос мегирад.','Ariza yuborildi! Menejer ko‘rsatilgan telefon raqami orqali siz bilan bog‘lanadi.','Өтінім жіберілді! Менеджер көрсетілген телефон нөмірі бойынша хабарласады.','Арыз жөнөтүлдү! Менеджер көрсөтүлгөн телефон номери аркылуу байланышат.','Arza iberildi! Menejer görkezilen telefon belgisi arkaly habarlaşar.']
 };
 function zumerTranslateTree(root,idx){
  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let node;while(node=walker.nextNode()){
@@ -463,8 +466,12 @@ document.getElementById('leadForm').addEventListener('submit',async e=>{
     });
     const result=await response.json().catch(()=>({}));
     if(!response.ok) throw new Error(result.error||'Не удалось отправить заявку');
-    message.textContent='Заявка успешно отправлена! Мы свяжемся с тобой по указанному телефону.';
     form.reset();
+    if(method==='official'){
+      message.innerHTML='<span>Анкета отправлена! Теперь заверши регистрацию на официальной странице Яндекса.</span><a href="https://reg.eda.yandex.ru/?advertisement_campaign=forms_for_agents&user_invite_code=8617ef427efd4aa38d1c8dfd8bbfae57&utm_content=blank&utm_campaign=gpt" target="_blank" rel="noopener noreferrer" style="display:block;margin-top:12px;padding:14px 16px;border-radius:12px;background:linear-gradient(110deg,#ffbd28,#ff8a1c);color:#24133f;text-align:center;text-decoration:none;font-weight:900">Перейти к официальной регистрации Яндекса ↗</a>';
+    }else{
+      message.textContent='Заявка отправлена! Менеджер свяжется с тобой по указанному телефону.';
+    }
     if(tg) tg.HapticFeedback?.notificationOccurred('success');
   }catch(error){
     message.textContent=error.message==='Failed to fetch'
