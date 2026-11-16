@@ -234,7 +234,7 @@ function zumerApplyLanguage(code){
 function chooseLanguage(code){localStorage.setItem('zumer_language',code);zumerApplyLanguage(code);}
 function showLanguageWelcome(){const saved=localStorage.getItem('zumer_language');if(saved&&ZUMER_LANGS.includes(saved))zumerApplyLanguage(saved);else document.getElementById('languageWelcome').hidden=false;}
 const zumerObserver=new MutationObserver(records=>{const idx=window.zumerLanguageIndex;if(!Number.isInteger(idx)||idx===0)return;records.forEach(record=>record.addedNodes.forEach(node=>{if(node.nodeType===Node.TEXT_NODE){const key=node.nodeValue.trim(),v=ZUMER_TRANSLATIONS[key];if(v&&v[idx])node.nodeValue=node.nodeValue.replace(key,v[idx]);}else if(node.nodeType===Node.ELEMENT_NODE&&!node.closest('#admin'))zumerTranslateTree(node,idx);}));});
-zumerObserver.observe(document.body,{childList:true,subtree:true});
+zumerObserver.observe(document.body,{childList:true,subtree:true,characterData:true});
 document.addEventListener('DOMContentLoaded',()=>{
  const selector=document.getElementById('lang');
  if(selector)selector.addEventListener('change',e=>{localStorage.setItem('zumer_language',e.target.value);location.reload();});
@@ -355,7 +355,7 @@ async function copyReferralLink(){
 }
 function shareReferralLink(){
  if(!currentReferralLink)return;
- const share="https://t.me/share/url?url="+encodeURIComponent(currentReferralLink)+"&text="+encodeURIComponent("Присоединяйся к ZUMER — оставь заявку на подключение курьером!");
+ const share="https://t.me/share/url?url="+encodeURIComponent(currentReferralLink)+"&text="+encodeURIComponent((window.zumerLanguageIndex===1?'Ба ZUMER ҳамроҳ шав — барои пайвастшавӣ ҳамчун курьер дархост фирист!':window.zumerLanguageIndex===2?'ZUMER’ga qo‘shil — kuryer bo‘lib ulanish uchun ariza qoldir!':window.zumerLanguageIndex===3?'ZUMER-ге қосыл — курьер болып қосылуға өтінім қалдыр!':window.zumerLanguageIndex===4?'ZUMERге кошул — курьер болуп кошулуу үчүн арыз калтыр!':window.zumerLanguageIndex===5?'ZUMER-e goşul — kurýer bolup birikmek üçin arza galdyr!':'Присоединяйся к ZUMER — оставь заявку на подключение курьером!'));
  const tg=window.Telegram&&window.Telegram.WebApp;
  if(tg&&tg.openTelegramLink)tg.openTelegramLink(share);else window.open(share,"_blank");
 }
@@ -363,7 +363,7 @@ function show(id,btn){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.tab===id));
-  if(id==='profile'){renderTelegramProfile();revealAdminButton();loadMyApplication();loadReferralInfo();}
+  if(id==='profile'){renderTelegramProfile();revealAdminButton();loadMyApplication();loadReferralInfo();const lang=localStorage.getItem('zumer_language');if(lang&&typeof zumerApplyLanguage==='function')zumerApplyLanguage(lang);}
   if(id==='admin'){loadAdminApplications();}
   window.scrollTo({top:0,behavior:'smooth'});
 }
